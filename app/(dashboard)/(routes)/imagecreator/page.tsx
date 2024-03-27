@@ -38,7 +38,8 @@ const imagecreatorPage = () => {
     defaultValues: {
       prompt: "",
       amount: "1",
-      resolution: "512x512" 
+      resolution: "512x512",
+      negative_prompt: "" 
     }
   });
 
@@ -48,7 +49,6 @@ const imagecreatorPage = () => {
     try {
       setImages([]);
       const response = await axios.post('/api/generateimage',values);
-      console.log(response);
       const urls = response.data;
       setImages(urls);
       form.reset();
@@ -96,7 +96,7 @@ const imagecreatorPage = () => {
               control={form.control}
               name="amount"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-2">
+                <FormItem className="col-span-12 lg:col-span-1">
                   <Select 
                     disabled={isLoading} 
                     onValueChange={field.onChange} 
@@ -126,7 +126,7 @@ const imagecreatorPage = () => {
               control={form.control}
               name="resolution"
               render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-2">
+                <FormItem className="col-span-12 lg:col-span-1">
                   <Select 
                     disabled={isLoading} 
                     onValueChange={field.onChange} 
@@ -150,6 +150,23 @@ const imagecreatorPage = () => {
                     </SelectContent>
                   </Select>
                 </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="negative_prompt"
+              render={({ field }) => (
+                <FormItem className="col-span-6 lg:col-span-2">
+                <FormControl className="m-0 p-0">
+                  <Input {...field} className="" 
+                  disabled={isLoading} 
+                  placeholder="worst, low quality"
+                  {...field}
+                  />
+                
+                </FormControl>
+
+              </FormItem>
               )}
             />
             <Button className="col-span-12 lg:col-span-2 w-full" disabled={isLoading}>

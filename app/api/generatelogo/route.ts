@@ -45,17 +45,15 @@ export async function POST(
       negative_prompt:negative_prompt
     }
 
-    console.log(input);
-
     const response = await replicate.run(
-      "fofr/realvisxl-v3:33279060bbbb8858700eb2146350a98d96ef334fcf817f37eb05915e1534aa1c",
+      "fofr/sdxl-abstract:a28d461dc16846310d03d12f8cbc31c5ef487356aa7b48ac1709969418768a03",
       {
         input
       }
     );
     return NextResponse.json(response);
   } catch (error) {
-    console.log('[IMAGE_ERROR]', error);
+    console.log('[LOGO_ERROR]', error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 };
