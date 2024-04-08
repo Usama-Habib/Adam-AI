@@ -2,7 +2,7 @@ import { authMiddleware } from "@clerk/nextjs";
  
 const newLocal = "/dashboard";
 export default authMiddleware({
-  publicRoutes: ["/"]
+  publicRoutes: ["/","/api/images"]
 });
  
 export const config = {
